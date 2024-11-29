@@ -1,4 +1,4 @@
-import { NotificationOutlined, UserOutlined } from "@ant-design/icons";
+import { UserOutlined } from "@ant-design/icons";
 
 interface MenuItem {
     id: number;
@@ -10,14 +10,8 @@ interface MenuItem {
 export const data: MenuItem[] = [
     {
         id: 1,
-        label: "table",
-        icon: NotificationOutlined,
-        path: "tabll",
-    },
-    {
-        id: 2,
-        label: "create",
+        label: "category-list",
         icon: UserOutlined,
-        path: "/app/user-create",
+        path: "tabll",
     },
 ];

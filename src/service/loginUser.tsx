@@ -1,26 +1,28 @@
 import React from "react";
 import Cookies from "js-cookie";
-import { Button, Input, Form, Typography } from "antd";
-import {  useLogin} from "./login";
-
+import { Button, Input, Form, Typography, message } from "antd";
+import { useLogin } from "./login";
+import { useNavigate } from "react-router-dom";
 import { ILogin } from "./login";
-import { data } from "react-router-dom";
 
 export const LoginUser: React.FC = () => {
     const { mutate } = useLogin();
-    
+    const navigate = useNavigate();
+
     const onFinish = (data: ILogin) => {
         mutate(data, {
             onSuccess: (res) => {
-                Cookies.set("token", res);
-            }
+                Cookies.set("token", res.data);
+                navigate("/app");
+                message.success("Login successfully");
+            },
         });
-    }
+    };
     return (
         <div className="container" style={containerStyle}>
             <Form
                 name="basic"
-                onFinish={()=> onFinish}
+                onFinish={onFinish}
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
                 style={formStyle}
@@ -31,18 +33,18 @@ export const LoginUser: React.FC = () => {
                     Login
                 </Typography.Title>
                 <Form.Item
-                    label="phone-number"
-                    name="phone-number"
+                    label="phone_number"
+                    name="phone_number"
                     rules={[
                         {
                             required: true,
-                            message: "Please input your email!",
+                            message: "Please input your phone number!",
                         },
                     ]}
                 >
-                    <Input 
-                        placeholder="Enter your phone number" 
-                        style={inputStyle} 
+                    <Input
+                        placeholder="Enter your phone number"
+                        style={inputStyle}
                     />
                 </Form.Item>
 
@@ -56,18 +58,18 @@ export const LoginUser: React.FC = () => {
                         },
                     ]}
                 >
-                    <Input.Password 
-                        placeholder="Enter your password" 
-                        style={inputStyle} 
+                    <Input.Password
+                        placeholder="Enter your password"
+                        style={inputStyle}
                     />
                 </Form.Item>
 
-                <Form.Item
-                    name="remember"
-                    valuePropName="checked"
-                    wrapperCol={{ offset: 8, span: 16 }}
-                >
-                    <Button type="primary" htmlType="submit" style={buttonStyle}>
+                <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        style={buttonStyle}
+                    >
                         Submit
                     </Button>
                 </Form.Item>
@@ -115,4 +117,3 @@ const buttonStyle: React.CSSProperties = {
     transition: "background-color 0.3s ease, transform 0.3s ease",
     fontSize: "16px",
 };
-

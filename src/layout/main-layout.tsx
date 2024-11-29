@@ -1,12 +1,6 @@
 import React from "react";
 import { data } from "./data-lay";
-import {
-    Layout,
-    Menu,
-    Typography,
-    Button,
-    MenuProps,
-} from "antd";
+import { Layout, Menu, Typography, Button, MenuProps } from "antd";
 import { Link, Outlet } from "react-router-dom";
 
 const { Header, Content, Sider } = Layout;
@@ -19,7 +13,7 @@ interface MenuItem {
     children?: MenuItem[];
 }
 
-const item: MenuProps['items'] = data.map((item: MenuItem) => ({
+const item: MenuProps["items"] = data.map((item: MenuItem) => ({
     key: item.id,
     label: <Link to={item.path}>{item.label}</Link>,
     icon: React.createElement(item.icon),
@@ -35,8 +29,21 @@ export const MainLayout: React.FC = () => {
     return (
         <div className="wrapper">
             <Layout style={{ minHeight: "100vh", backgroundColor: "#f0f2f5" }}>
-                <Header style={{ backgroundColor: "#001529", display: "flex", alignItems: "center" }}>
-                    <div className="demo-logo" style={{ color: "white", fontSize: "24px", fontWeight: "bold" }}>
+                <Header
+                    style={{
+                        backgroundColor: "#001529",
+                        display: "flex",
+                        alignItems: "center",
+                    }}
+                >
+                    <div
+                        className="demo-logo"
+                        style={{
+                            color: "white",
+                            fontSize: "24px",
+                            fontWeight: "bold",
+                        }}
+                    >
                         ADMIN
                     </div>
                 </Header>
@@ -65,14 +72,18 @@ export const MainLayout: React.FC = () => {
                         />
                     </Sider>
                     <Layout style={{ padding: "24px", transition: "all 0.2s" }}>
-                        <Content style={{
-                            padding: "24px",
-                            background: "#fff",
-                            borderRadius: "8px",
-                            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
-                            transition: "transform 0.3s ease",
-                        }}>
-                            <Typography onClick={() => setCollapsed(!collapsed)}>
+                        <Content
+                            style={{
+                                padding: "24px",
+                                background: "#fff",
+                                borderRadius: "8px",
+                                boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+                                transition: "transform 0.3s ease",
+                            }}
+                        >
+                            <Typography
+                                onClick={() => setCollapsed(!collapsed)}
+                            >
                                 <Button
                                     type="primary"
                                     onClick={() => setCollapsed(!collapsed)}
