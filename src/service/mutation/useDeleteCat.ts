@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import { request } from "../../config/request";
 
-export const useCreateCategory = () => {
+export const useDeleteCategory = () => {
     return useMutation({
-        mutationFn: (data: FormData) => request.post("/category/", data),
+        mutationFn: (id: string) => request.delete(`/category/${id}/`),
     });
 };

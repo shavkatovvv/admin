@@ -12,7 +12,7 @@ export const LoginUser: React.FC = () => {
     const onFinish = (data: ILogin) => {
         mutate(data, {
             onSuccess: (res) => {
-                Cookies.set("token", res.data);
+                Cookies.set("Token", res.data.token);
                 navigate("/app");
                 message.success("Login successfully");
             },

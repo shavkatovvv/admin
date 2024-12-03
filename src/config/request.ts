@@ -5,8 +5,9 @@ export const request = axios.create({ baseURL: "http://localhost:8000" });
 
 request.interceptors.request.use(
     (config) => {
-        config.url !== "/api/admin-login/";
-        config.headers.Authorization = `Token ${Cookies.get("Token")}`;
+        if (config.url !== "/api/admin-login/") {
+            config.headers.Authorization = `Token ${Cookies.get("Token")}`;
+        }
         return config;
     },
     (config) => {

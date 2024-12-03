@@ -13,9 +13,9 @@ export interface CategoryType {
     }[];
 }
 
-export const useGetCategory = () => {
+export const useGetSubCategory = () => {
     return useQuery<CategoryType>({
         queryKey: ["category"],
-        queryFn: () => request.get("/category/").then((res) => res.data),
+        queryFn: () => request.get("/api/subcategory/").then((res) => res.data),
     });
 };
