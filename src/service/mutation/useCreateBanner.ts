@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import { request } from "../../config/request";
 
-export const useCreateSubCategory = () => {
+export const useCreateBanner = () => {
     return useMutation({
         mutationFn: (formData: FormData) =>
-            request.post(`/category/`, formData).then((res) => res.data.data),
+            request.post(`/banner/`, formData).then((res) => res.data),
     });
 };

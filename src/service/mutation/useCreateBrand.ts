@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import { request } from "../../config/request";
 
-export const useCreateSubCategory = () => {
+export const useCreateBrand = () => {
     return useMutation({
         mutationFn: (formData: FormData) =>
-            request.post(`/category/`, formData).then((res) => res.data.data),
+            request.post(`/brand/`, formData).then((res) => res.data),
     });
 };

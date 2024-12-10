@@ -1,4 +1,9 @@
-import { UserOutlined, BlockOutlined } from "@ant-design/icons";
+import {
+    UserOutlined,
+    BlockOutlined,
+    DingtalkSquareFilled,
+    BarcodeOutlined,
+} from "@ant-design/icons";
 
 interface MenuItem {
     id: number;
@@ -20,5 +25,19 @@ export const data: MenuItem[] = [
         label: "Sub-category-list",
         icon: BlockOutlined,
         path: "Sub-category",
+    },
+
+    {
+        id: 3,
+        label: "Brand-list",
+        icon: DingtalkSquareFilled,
+        path: "Brand-list",
+    },
+
+    {
+        id: 4,
+        label: "Banner-list",
+        icon: BarcodeOutlined,
+        path: "Banner-list",
     },
 ];

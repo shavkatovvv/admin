@@ -9,6 +9,6 @@ interface CategoryEdit {
 export const useEditCategory = () => {
     return useMutation({
         mutationFn: ({ id, data }: CategoryEdit) =>
-            request.put(`/category/${id}/`, data),
+            request.patch(`/category/${id}/`, data),
     });
 };

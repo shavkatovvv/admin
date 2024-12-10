@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button, message, Popconfirm } from "antd";
+import { Table, Button, message, Popconfirm, Image } from "antd";
 import { useNavigate } from "react-router-dom";
-import { useGetCategory } from "../service/query/useGetCategory";
-import { useDeleteCategory } from "../service/mutation/useDeleteCat";
+import { useGetBrand } from "../service/query/useGetBrand";
+import { useDeleteBrand } from "../service/mutation/useDeleteBrand";
 import { client } from "../main";
 // import { useEditCategory } from "../service/mutation/useEditCat";
 
@@ -13,16 +13,16 @@ export interface DataType {
     title: string;
 }
 
-const TableComponent: React.FC = () => {
+const Brand: React.FC = () => {
     const [data, setData] = useState<DataType[]>([]);
     const navigate = useNavigate();
-    const { data: categoryData } = useGetCategory();
-    const { mutate: deleteCategory } = useDeleteCategory();
+    const { data: BrandData } = useGetBrand();
+    const { mutate: useDeleteB } = useDeleteBrand();
     // const { mutate: editCategory } = useEditCategory();
 
     useEffect(() => {
-        if (categoryData) {
-            const formattedData = categoryData.results.map((item) => ({
+        if (BrandData) {
+            const formattedData = BrandData.results.map((item) => ({
                 id: item?.id?.toString(),
                 key: item?.id?.toString(),
                 image: item.image,
@@ -30,13 +30,13 @@ const TableComponent: React.FC = () => {
             }));
             setData(formattedData);
         }
-    }, [categoryData]);
+    }, [BrandData]);
 
     const Delete = (id: string) => {
-        deleteCategory(id, {
+        useDeleteB(id, {
             onSuccess: () => {
-                message.success("Category deleted successfully");
-                client.invalidateQueries({ queryKey: ["category"] });
+                message.success("Brand deleted successfully");
+                client.invalidateQueries({ queryKey: ["Brand"] });
             },
         });
     };
@@ -62,7 +62,7 @@ const TableComponent: React.FC = () => {
             dataIndex: "image",
             width: "25%",
             render: (text: string) => (
-                <img src={text} alt="category" style={{ width: "100px" }} />
+                <Image src={text} alt="Brand" style={{ width: "100px" }} />
             ),
             editable: true,
         },
@@ -87,7 +87,7 @@ const TableComponent: React.FC = () => {
                         Edit
                     </Button>
                     <Popconfirm
-                        title="Are you sure to delete this category?"
+                        title="Are you sure to delete this brand?"
                         onConfirm={() => Delete(record.id)}
                         okText="Yes"
                         cancelText="No"
@@ -112,7 +112,7 @@ const TableComponent: React.FC = () => {
             <Button
                 style={{ marginBottom: "20px" }}
                 type="primary"
-                onClick={() => navigate("Tab-category")}
+                onClick={() => navigate("/app/Brand-list/create-brand")}
             >
                 Create
             </Button>
@@ -126,4 +126,4 @@ const TableComponent: React.FC = () => {
     );
 };
 
-export default TableComponent;
+export default Brand;

@@ -9,7 +9,7 @@ export const Tabb: React.FC = () => (
             {
                 label: "Create Category",
                 key: "1",
-                children: CreateCategory(),
+                children: <CreateCategory />,
             },
             {
                 label: "Sub-Category",

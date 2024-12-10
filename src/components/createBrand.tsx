@@ -1,10 +1,10 @@
-import { useCreateCategory } from "../service/mutation/useCreateCategory";
+import { useCreateBrand } from "../service/mutation/useCreateBrand";
 import { ReusableForm } from "../reusable/reusablefom";
 import { message, Form } from "antd";
 import { useNavigate } from "react-router-dom";
 
-export const CreateCategory = () => {
-    const { mutate } = useCreateCategory();
+export const CreateBrand = () => {
+    const { mutate } = useCreateBrand();
     const [form] = Form.useForm();
     const navigate = useNavigate();
 
@@ -23,12 +23,12 @@ export const CreateCategory = () => {
 
         mutate(formData, {
             onSuccess: () => {
-                message.success("Category added successfully!");
+                message.success("Brand added successfully!");
                 form.resetFields();
-                navigate("/app");
+                navigate("/app/Brand-list");
             },
             onError: (error) => {
-                message.error(`Failed to add category: ${error.message}`);
+                message.error(`Failed to add brand: ${error.message}`);
             },
         });
     };

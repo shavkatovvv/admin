@@ -6,7 +6,10 @@ interface ReusableFormProps {
     form: any;
 }
 
-export const ReusableForm: React.FC<ReusableFormProps> = ({ submit, form }) => {
+export const ReusableFormBanner: React.FC<ReusableFormProps> = ({
+    submit,
+    form,
+}) => {
     const [fileList, setFileList] = useState<any[]>([]);
 
     const handleFileChange = ({ fileList: newFileList }: any) => {
@@ -25,8 +28,8 @@ export const ReusableForm: React.FC<ReusableFormProps> = ({ submit, form }) => {
         <>
             <Form.Item
                 style={{ width: "400px" }}
-                label="Title"
-                name="title"
+                label="Description"
+                name="description"
                 rules={[{ required: true, message: "Please enter a title!" }]}
             >
                 <Input />

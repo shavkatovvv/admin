@@ -1,42 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button, message, Popconfirm } from "antd";
 import { useNavigate } from "react-router-dom";
-import { useGetCategory } from "../service/query/useGetCategory";
-import { useDeleteCategory } from "../service/mutation/useDeleteCat";
+import { useGetBanner } from "../service/query/useGetBanner";
+import { useDeleteBanner } from "../service/mutation/useDeleteBanner";
 import { client } from "../main";
+import { Image } from "antd";
 // import { useEditCategory } from "../service/mutation/useEditCat";
 
 export interface DataType {
     key: string;
     id: string;
     render?: (image: string) => React.ReactNode;
-    title: string;
+    description: string;
 }
 
-const TableComponent: React.FC = () => {
+const Banner: React.FC = () => {
     const [data, setData] = useState<DataType[]>([]);
     const navigate = useNavigate();
-    const { data: categoryData } = useGetCategory();
-    const { mutate: deleteCategory } = useDeleteCategory();
+    const { data: BannerData } = useGetBanner();
+    const { mutate: useDeleteB } = useDeleteBanner();
     // const { mutate: editCategory } = useEditCategory();
 
     useEffect(() => {
-        if (categoryData) {
-            const formattedData = categoryData.results.map((item) => ({
+        if (BannerData) {
+            const formattedData = BannerData.results.map((item: any) => ({
                 id: item?.id?.toString(),
                 key: item?.id?.toString(),
                 image: item.image,
-                title: item.title,
+                description: item.description,
             }));
             setData(formattedData);
         }
-    }, [categoryData]);
+    }, [BannerData]);
 
     const Delete = (id: string) => {
-        deleteCategory(id, {
+        useDeleteB(id, {
             onSuccess: () => {
-                message.success("Category deleted successfully");
-                client.invalidateQueries({ queryKey: ["category"] });
+                message.success("Banner deleted successfully");
+                client.invalidateQueries({ queryKey: ["Banner"] });
             },
         });
     };
@@ -62,13 +63,13 @@ const TableComponent: React.FC = () => {
             dataIndex: "image",
             width: "25%",
             render: (text: string) => (
-                <img src={text} alt="category" style={{ width: "100px" }} />
+                <Image src={text} alt="Banner" style={{ width: "100px" }} />
             ),
             editable: true,
         },
         {
-            title: "Title",
-            dataIndex: "title",
+            title: "Description",
+            dataIndex: "description",
             width: "25%",
             editable: true,
         },
@@ -87,7 +88,7 @@ const TableComponent: React.FC = () => {
                         Edit
                     </Button>
                     <Popconfirm
-                        title="Are you sure to delete this category?"
+                        title="Are you sure to delete this banner?"
                         onConfirm={() => Delete(record.id)}
                         okText="Yes"
                         cancelText="No"
@@ -112,7 +113,7 @@ const TableComponent: React.FC = () => {
             <Button
                 style={{ marginBottom: "20px" }}
                 type="primary"
-                onClick={() => navigate("Tab-category")}
+                onClick={() => navigate("/app/Banner-list/create-banner")}
             >
                 Create
             </Button>
@@ -126,4 +127,4 @@ const TableComponent: React.FC = () => {
     );
 };
 
-export default TableComponent;
+export default Banner;
